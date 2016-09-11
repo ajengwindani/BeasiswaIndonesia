@@ -3,12 +3,19 @@ package id.sch.smktelkom_mlg.tugas01.xiirpl1005.beasiswaindonesia;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import id.sch.smktelkom_mlg.tugas01.xiirpl1005.beasiswaindonesia.adapter.KotaAdapter;
 
 public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
@@ -18,12 +25,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     RadioButton rbLK, rbPR;
     CheckBox cbOS, cbPR, cbJR;
     Button bOk;
-    //    Spinner spProvinsi, spKota;
+    Spinner spProvinsi, spKota;
     TextView tvHasil, tvHasil1, tvHasil2, tvHasil3, tvHasil4, tvHasil5, tvOrgan, tvHasil6, tvHasil7;
     int nOrgan;
-    /*String [][] arKota = {{"Medan","Pematangsiantar","Binjai","Sibolga"},{"Padang","Bukittinggi","Solok","Payakumbuh"},{"Palembang","Lahat","Prabumulih","Lubuklinggau"},{"Bandar Lampung","Kalianda","Tulang Bawang","Metro"},{"Jakarta Barat","Jakarta Utara","Jakarta Selatan","Jakarta Timur","Jakarta Pusat"},{"Bandung","Cirebon","Bekasi","Bogor"},{"Semarang","Solo","Wonogiri","Salatiga"},{"Surabaya","Malang","Madiun","Kediri"},{"Denpasar","Tabanan","Gianyar","Klungkung"},{"Ende","Kupang","Labuan Bajo","Maumere"},{"Tondano","Boolang Mongondoow","Minahasa","Talaud"},{"Mamuju","Mamasa","Polewali"},{"Bulukumba","Masamba","Watampone"},{"Sukadana","Ketapang","Sambas","Sanggau"},{"Tenggarong","Berau","Balikpapan","Samarinda"},{"Banjar","Martapura","Paringin","Amuntai"},{"Biak","Sentani","Wamena","Yapen"}};
+    String[][] arKota = {{"Medan", "Pematangsiantar", "Binjai", "Sibolga"}, {"Padang", "Bukittinggi", "Solok", "Payakumbuh"}, {"Palembang", "Lahat", "Prabumulih", "Lubuklinggau"}, {"Bandar Lampung", "Kalianda", "Tulang Bawang", "Metro"}, {"Jakarta Barat", "Jakarta Utara", "Jakarta Selatan", "Jakarta Timur", "Jakarta Pusat"}, {"Bandung", "Cirebon", "Bekasi", "Bogor"}, {"Semarang", "Solo", "Wonogiri", "Salatiga"}, {"Surabaya", "Malang", "Madiun", "Kediri"}, {"Denpasar", "Tabanan", "Gianyar", "Klungkung"}, {"Ende", "Kupang", "Labuan Bajo", "Maumere"}, {"Tondano", "Boolang Mongondoow", "Minahasa", "Talaud"}, {"Mamuju", "Mamasa", "Polewali"}, {"Bulukumba", "Masamba", "Watampone"}, {"Sukadana", "Ketapang", "Sambas", "Sanggau"}, {"Tenggarong", "Berau", "Balikpapan", "Samarinda"}, {"Banjar", "Martapura", "Paringin", "Amuntai"}, {"Biak", "Sentani", "Wamena", "Yapen"}};
     ArrayList<String> listKota = new ArrayList<>();
-   ArrayAdapter<String> adapter;*/
+    KotaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         cbOS = (CheckBox) findViewById(R.id.checkBoxOS);
         cbPR = (CheckBox) findViewById(R.id.checkBoxPr);
         cbJR = (CheckBox) findViewById(R.id.checkBoxJr);
-        /*spProvinsi = (Spinner) findViewById(R.id.spinnerProvinsi);
-        spKota = (Spinner) findViewById(R.id.spinnerKota);*/
+        spProvinsi = (Spinner) findViewById(R.id.spinnerProvinsi);
+        spKota = (Spinner) findViewById(R.id.spinnerKota);
         bOk = (Button) findViewById(R.id.buttonOK);
         tvHasil = (TextView) findViewById(R.id.textViewHasil);
         tvHasil1 = (TextView) findViewById(R.id.textViewHasil1);
@@ -68,29 +75,27 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         cbOS.setOnCheckedChangeListener(this);
         cbPR.setOnCheckedChangeListener(this);
         cbJR.setOnCheckedChangeListener(this);
-/*
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listKota);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-//        spKota.setAdapter(adapter);
+        adapter = new KotaAdapter(this, listKota);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spKota.setAdapter(adapter);
 
-       /* spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        spProvinsi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
-            {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
                 listKota.clear();
                 listKota.addAll(Arrays.asList(arKota[pos]));
-                adapter.setProvinsi((String)spProvinsi.getItemAtPosition(pos));
+//                adapter.setProvinsi((String)spProvinsi.getItemAtPosition(pos));
                 adapter.notifyDataSetChanged();
                 spKota.setSelection(0);
-            }*/
+            }
 
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView)
-//            {
-//
-//            }
-//        });
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+
+            }
+        });
     }
 
     private void doProcess() {
@@ -124,8 +129,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             }
             tvHasil4.setText("Asal Sekolah : " + sekolah);
             tvHasil5.setText(hasil1);
-           /* tvHasil6.setText("Provinsi : "+ spProvinsi.getSelectedItem().toString());
-            tvHasil7.setText("Kota : "+spKota.getSelectedItem().toString())*/
+            tvHasil6.setText("Provinsi : " + spProvinsi.getSelectedItem().toString());
+            tvHasil7.setText("Kota : " + spKota.getSelectedItem().toString());
         }
     }
 

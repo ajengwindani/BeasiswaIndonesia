@@ -143,8 +143,8 @@
     <Spinner
         android:id="@+id/spinnerProvinsi"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <!--android:entries="@array/provinsi"-->
+        android:layout_height="wrap_content"
+        android:entries="@array/provinsi" />
 
     <Spinner
         android:id="@+id/spinnerKota"
