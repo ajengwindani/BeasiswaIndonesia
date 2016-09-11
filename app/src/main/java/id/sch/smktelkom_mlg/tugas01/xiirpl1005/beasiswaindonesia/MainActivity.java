@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
     EditText etNama;
     EditText etTahun;
-    //    EditText etSekolah;
+    EditText etSekolah;
     RadioButton rbLK, rbPR;
     CheckBox cbOS, cbPR, cbJR;
     Button bOk;
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         etNama = (EditText) findViewById(R.id.editTextNama);
         etTahun = (EditText) findViewById(R.id.editTextTahun);
-//        etSekolah = (EditText) findViewById(R.id.editTextSekolah);
+        etSekolah = (EditText) findViewById(R.id.editTextSekolah);
         rbLK = (RadioButton) findViewById(R.id.radioButtonLk);
         rbPR = (RadioButton) findViewById(R.id.radioButtonPr);
         cbOS = (CheckBox) findViewById(R.id.checkBoxOS);
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         if (isValid()) {
             String nama = etNama.getText().toString();
             String hasil = null;
-//            String sekolah = etSekolah.getText().toString();
+            String sekolah = etSekolah.getText().toString();
             if (rbLK.isChecked()) {
                 hasil = rbLK.getText().toString();
             } else if (rbPR.isChecked()) {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             } else {
                 tvHasil3.setText("Jenis kelamin : " + hasil);
             }
-//            tvHasil4.setText("Asal Sekolah : " + sekolah);
+            tvHasil4.setText("Asal Sekolah : " + sekolah);
             tvHasil5.setText(hasil1);
            /* tvHasil6.setText("Provinsi : "+ spProvinsi.getSelectedItem().toString());
             tvHasil7.setText("Kota : "+spKota.getSelectedItem().toString())*/
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         String nama = etNama.getText().toString();
         String tahun = etTahun.getText().toString();
-//        String sekolah = etSekolah.getText().toString();
+        String sekolah = etSekolah.getText().toString();
 
         if (nama.isEmpty()) {
             etNama.setError("Nama belum diisi");
@@ -156,20 +156,15 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             etTahun.setError(null);
         }
 
-//        if(sekolah.isEmpty())
-//        {
-//            etSekolah.setError("Sekolah belum diisi");
-//            valid = false;
-//        }
-//        else if(sekolah.length()<3)
-//        {
-//            etSekolah.setError("Sekolah harus diisi");
-//            valid = false;
-//        }
-//        else
-//        {
-//            etSekolah.setError(null);
-//        }
+        if (sekolah.isEmpty()) {
+            etSekolah.setError("Sekolah belum diisi");
+            valid = false;
+        } else if (sekolah.length() < 3) {
+            etSekolah.setError("Sekolah harus diisi");
+            valid = false;
+        } else {
+            etSekolah.setError(null);
+        }
 
         return valid;
     }
