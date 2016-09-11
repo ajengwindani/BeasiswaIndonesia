@@ -16,11 +16,12 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     EditText etNama;
     EditText etTahun;
     EditText etSekolah;
+    EditText etAlamat;
     RadioButton rbLK, rbPR;
     CheckBox cbOS, cbPR, cbJR;
     Button bOk;
     Spinner spKota;
-    TextView tvHasil, tvHasil1, tvHasil2, tvHasil3, tvHasil4, tvHasil5, tvOrgan, tvHasil6;
+    TextView tvHasil, tvHasil1, tvHasil2, tvHasil3, tvHasil4, tvHasil5, tvOrgan, tvHasil6, tvHasil7, tvHasil8;
     int nOrgan;
 
 
@@ -32,12 +33,13 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         etNama = (EditText) findViewById(R.id.editTextNama);
         etTahun = (EditText) findViewById(R.id.editTextTahun);
         etSekolah = (EditText) findViewById(R.id.editTextSekolah);
+        etAlamat = (EditText) findViewById(R.id.editTextAlamat);
         rbLK = (RadioButton) findViewById(R.id.radioButtonLk);
         rbPR = (RadioButton) findViewById(R.id.radioButtonPr);
         cbOS = (CheckBox) findViewById(R.id.checkBoxOS);
         cbPR = (CheckBox) findViewById(R.id.checkBoxPr);
         cbJR = (CheckBox) findViewById(R.id.checkBoxJr);
-        spKota = (Spinner) findViewById(R.id.spinnerProvinsi);
+        spKota = (Spinner) findViewById(R.id.spinnerKota);
         bOk = (Button) findViewById(R.id.buttonOK);
         tvHasil = (TextView) findViewById(R.id.textViewHasil);
         tvHasil1 = (TextView) findViewById(R.id.textViewHasil1);
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         tvHasil5 = (TextView) findViewById(R.id.textViewHasil5);
         tvOrgan = (TextView) findViewById(R.id.textViewOR);
         tvHasil6 = (TextView) findViewById(R.id.textViewHasil6);
+        tvHasil7 = (TextView) findViewById(R.id.textViewHasil7);
+        tvHasil8 = (TextView) findViewById(R.id.textViewHasil8);
 
         bOk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             String nama = etNama.getText().toString();
             String hasil = null;
             String sekolah = etSekolah.getText().toString();
+            String alamat = etAlamat.getText().toString();
             if (rbLK.isChecked()) {
                 hasil = rbLK.getText().toString();
             } else if (rbPR.isChecked()) {
@@ -100,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
             tvHasil4.setText("Asal Sekolah : " + sekolah);
             tvHasil5.setText(hasil1);
             tvHasil6.setText("Kota : " + spKota.getSelectedItem().toString());
-
+            tvHasil7.setText("Alamat : " + alamat);
+            tvHasil8.setText("Data Diri Anda Telah Terisi, Pendaftaran Beasiswa Akan Segera Diproses ");
         }
     }
 
@@ -110,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         String nama = etNama.getText().toString();
         String tahun = etTahun.getText().toString();
         String sekolah = etSekolah.getText().toString();
+        String alamat = etAlamat.getText().toString();
 
         if (nama.isEmpty()) {
             etNama.setError("Nama belum diisi");
@@ -140,6 +147,17 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         } else {
             etSekolah.setError(null);
         }
+
+        if (alamat.isEmpty()) {
+            etAlamat.setError("Alamat belum diisi");
+            valid = false;
+        } else if (alamat.length() < 3) {
+            etAlamat.setError("Alamat harus diisi");
+            valid = false;
+        } else {
+            etAlamat.setError(null);
+        }
+
 
         return valid;
     }

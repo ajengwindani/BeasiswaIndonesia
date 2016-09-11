@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="Kota">
+    <string-array name="kota">
         <item>Medan</item>
         <item>Pematangsiantar</item>
         <item>Binjai</item>
